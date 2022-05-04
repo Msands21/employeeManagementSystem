@@ -5,11 +5,12 @@ USE employee_db;
 
 CREATE TABLE department (
     id INT UNSIGNED AUTO_INCREMENT,
-    name VARCHAR(250) UNIQUE NOT NULL,
+    department_name VARCHAR(250) UNIQUE NOT NULL,
+    roles_id INT,
     PRIMARY KEY (id)
 );
 
-CREATE TABLE role (
+CREATE TABLE roles (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(250) UNIQUE NOT NULL,
     salary DECIMAL UNSIGNED NOT NULL,
@@ -22,8 +23,8 @@ CREATE TABLE employees (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(250) UNIQUE NOT NULL,
     last_name VARCHAR(250) UNIQUE NOT NULL,
-    role_id INT UNSIGNED NOT NULL,
-    review TEXT NOT NULL,
-    FOREIGN KEY (role_id)
-    REFERENCES role(id)
+    roles_id INT UNSIGNED NOT NULL,
+    manager_id INT,
+    FOREIGN KEY (manager_id)
+    REFERENCES employees(id)
 );
