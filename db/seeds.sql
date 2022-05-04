@@ -1,11 +1,11 @@
 USE employee_db;
 
-INSERT INTO employees(id, first_name, last_name, roles_id, manager_id)
+INSERT INTO department(name)
 VALUES 
-(1, 'Mike', 'Sands', '1', '1'),
-(2, 'Joan', 'Shelly', '2', '2'),
-(3, 'John', 'Malone', '3', '3'),
-(4, 'Andrew', 'Burnstine', '4', '4');
+("Engineering"),
+("Human Resources"), 
+("Operations"),
+("Legal");
 
 INSERT INTO roles(title, salary, department_id)
 VALUES 
@@ -14,9 +14,22 @@ VALUES
 ("Operations Manager", 130000, 3),
 ("Lawyer", 180000, 4);
 
-INSERT INTO department(department_name, roles_id)
+INSERT INTO employee(first_name, last_name, role_id, manager_id, manager_confirm)
 VALUES 
-("Engineering", "1"),
-("Human Resources", "2"), 
-("Operations", "3"),
-("Legal", "4");
+('Mike', 'Sands', 1, null, true),
+('Joan', 'Shelly', 2, 2, false),
+('John', 'Doe', 2, null, true),
+('John', 'Malone', 3, 3, false),
+('Jeff', 'Griffin', 3, null, true),
+('Andrew', 'Burnstine', 4, null, true),
+('Jermaine', 'Burnstine', 4, 4, false);
+
+INSERT INTO manager (first_name, last_name)
+SELECT first_name,
+    last_name
+FROM employee
+WHERE manager_confirm = 1;
+
+
+
+

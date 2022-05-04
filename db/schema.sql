@@ -3,28 +3,36 @@ CREATE DATABASE employee_db;
 
 USE employee_db;
 
+CREATE TABLE manager (
+    id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE department (
-    id INT UNSIGNED AUTO_INCREMENT,
-    department_name VARCHAR(250) UNIQUE NOT NULL,
-    roles_id INT,
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(250),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE roles (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(250) UNIQUE NOT NULL,
-    salary DECIMAL UNSIGNED NOT NULL,
-    department_id INT UNSIGNED NOT NULL,
-    FOREIGN KEY (department_id)
-    REFERENCES department(id)
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(250),
+    salary DECIMAL,
+    department_id INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
-CREATE TABLE employees (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(250) UNIQUE NOT NULL,
-    last_name VARCHAR(250) UNIQUE NOT NULL,
-    roles_id INT UNSIGNED NOT NULL,
+CREATE TABLE employee (
+    id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(250),
+    last_name VARCHAR(250),
+    role_id INT,
     manager_id INT,
-    FOREIGN KEY (manager_id)
-    REFERENCES employees(id)
+    manager_confirm BOOLEAN,
+    PRIMARY KEY (id),
+    FOREIGN KEY (role_id) REFERENCES roles(id),
+    FOREIGN KEY (manager_id) REFERENCES roles(id) ON DELETE SET NULL
 );
