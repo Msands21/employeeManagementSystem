@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 
+// Main menu upon node index
 const mainMenu = () => {
     inquirer
         .prompt ({
@@ -16,6 +17,7 @@ const mainMenu = () => {
                 'Quit'
             ],
         })
+        // answer given will determine which case will run
         .then(answer => {
         switch (answer['choice']) {
             case 'View all departments':
@@ -37,7 +39,6 @@ const mainMenu = () => {
                 addEmployee();
                 break;
             case 'Quit':
-                quit();
                 break;
         }
     })
